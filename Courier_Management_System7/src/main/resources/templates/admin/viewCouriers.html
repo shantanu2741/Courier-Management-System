@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>View My Couriers</title>
+</head>
+<body>
+	<h3>View All Couriers</h3>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Courier Id</th>
+				<th>Courier Sender Details</th>
+				<th>Courier Receiver Name</th>
+				<th>Courier Receiver Address</th>
+				<th>Courier Receiver Contact</th>
+				<th>Courier Description</th>
+				<th>Courier Weight</th>
+				<th>Courier Dimentions</th>
+				<th>Contact Type of content</th>
+				<th>Courier Type</th>
+				<th>Courier Operations</th>
+				<th>Courier Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="e, iterStat : ${courierList}">
+				<th scope="row">[[${iterStat.index + 1}]]</th>
+				<td>Name : [[${e.user.name}]]
+                Email : [[${e.user.email}]]</td>
+				<td>[[${e.receiverName}]]</td>
+				<td>[[${e.receiverAddress}]]</td>
+				<td>[[${e.receiverContact}]]</td>
+				<td>[[${e.courierDescription}]]</td>
+				<td>[[${e.courierWeight}]]</td>
+				<td>[[${e.courierDimentions}]]</td>
+				<td>[[${e.courierContent}]]</td>
+				<td>[[${e.courierType}]]</td>
+				<td><a th:href="@{'/admin/EditCourier/'+${e.courierId}}">Edit</a>
+					<a th:href="@{'/admin/deleteCourier/'+${e.courierId}}">Delete</a></td>
+				<td>[[${e.status}]]</td>
+				
+				<td>
+					<form action="/admin/update-courier-status" method="post">
+						<select name="st">
+							<option>--Select--</option>
+							<option value="1">Picked Up</option>
+							<option value="2">In_Transit</option>
+							<option value="3">Out_for_Delivery</option>
+							<option value="4">Delivered</option>
+							<option value="5">Cancelled</option>
+						</select>
+						<input th:value="${e.courierId}" name="id" type="hidden">
+						<th:block th:if="${e.status!='Cancelled' || e.status!='Delivered'}">
+					     <button>Update</button>
+							<th:block th:if="${e.status!='Cancelled' || e.status!='Delivered'}">
+						 <button>Update</button>
+				       </th:block>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

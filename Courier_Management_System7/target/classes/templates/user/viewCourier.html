@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View My Couriers</title>
+</head>
+<body>
+    <h3>View My Couriers</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Courier Id</th>
+                <th>Courier Sender Details</th>
+                <th>Courier Receiver Name</th>
+                <th>Courier Receiver Address</th>
+                <th>Courier Receiver Contact</th>
+                <th>Courier Description</th>
+                <th>Courier Weight</th>
+                <th>Courier Dimensions</th>
+                <th>Contact Type of Content</th>
+                <th>Courier Type</th>
+                <th>Courier Status</th>
+                <th>Courier Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="e : ${couriers}">
+                <td>[[${e.courierId}]]</td>
+                <td>Name : [[${e.user.name}]]
+                Email : [[${e.user.email}]]</td>
+                <td>[[${e.receiverName}]]</td>
+                <td>[[${e.receiverAddress}]]</td>
+                <td>[[${e.receiverContact}]]</td>
+                <td>[[${e.courierDescription}]]</td>
+                <td>[[${e.courierWeight}]]</td>
+                <td>[[${e.courierDimentions}]]</td>
+                <td>[[${e.courierContent}]]</td>
+                <td>[[${e.courierType}]]</td>
+                <td>[[${e.status}]]</td>
+                <td>
+                <th:block th:if="${e.status!='Cancelled'}">
+					     <a th:href="@{'/user/update-status?id='+${e.courierId}+'&st=5' }">Cancel</a>
+							</th:block> <th:block th:unless="${e.status!='Cancelled'}">
+							<a href="#" >Cancel</a>
+				</th:block>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+

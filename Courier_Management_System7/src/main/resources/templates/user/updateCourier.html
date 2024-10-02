@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Courier Details</title>
+</head>
+<body>
+
+    <form action="updateCourierDtls" method="post">
+        <input type="hidden" name="id" th:value="${courier.courierId}" />
+
+        Receivers Name : <input type="text" name="receiverName" 
+        th:value="${courier.receiverName}" /><br/><br/>
+        Receivers Address : <input type="text" name="receiverAddress" 
+        th:value="${courier.receiverAddress}" /><br><br/>
+        
+
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
